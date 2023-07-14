@@ -34,18 +34,25 @@ export class CoffeesController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   createCoffee(@Body() body) {
+    this.logger.log(
+      `Create coffee invoked to add coffee with name ${body.name}`,
+    );
     return body;
   }
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   updateCoffee(@Param('id') id: string, @Body() body) {
+    this.logger.log(
+      `Update coffee invoked to edit coffee with name ${body.name}`,
+    );
     return `Element with ${id} will be updated with ${body.name}`;
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   removeCoffee(@Param('id') id: string) {
+    this.logger.log(`Delete coffee invoked to delete coffee with id: ${id}`);
     return `Element with ${id} will be removed with`;
   }
 }
