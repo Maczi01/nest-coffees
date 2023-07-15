@@ -9,26 +9,30 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CoffeesService } from './coffees.service';
 
 @Controller('coffees')
 @ApiTags('coffees')
 export class CoffeesController {
   private readonly logger = new Logger(CoffeesController.name);
 
+  constructor(private readonly coffeesService: CoffeesService) {}
+
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll() {
+  findAll(@Query() paginationQuery) {
+    // const { limit, offset } = paginationQuery;
     this.logger.log('Find all invoked');
-    return 'GET request 2';
+    return this.coffeesService.findAll();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   findById(@Param('id') coffeeId: number) {
-    this.logger.log(`Get item with param ${coffeeId}`);
-    return `Get item with param ${coffeeId}`;
+    return this.coffeesService.findById(coffeeId);
   }
 
   @Post()
