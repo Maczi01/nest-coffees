@@ -1,4 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
 
 @Injectable()
@@ -19,9 +25,12 @@ export class CoffeesService {
   }
 
   findById(coffeeId: number) {
-    this.logger.log(`Get item with param ${coffeeId}`);
-    const n = coffeeId - 1;
-    return this.coffees[n];
+    this.logger.log(`Get item with id ${coffeeId}`);
+    const coffee = this.coffees.find(({ id }) => id === +coffeeId);
+    if (!coffee) {
+      throw new NotFoundException(`Coffee #${coffeeId} not found`);
+    }
+    return coffee;
   }
 
   create(body: Coffee) {
