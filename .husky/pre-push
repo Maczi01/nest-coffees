@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-#yarn --frozen-lockfile && yarn lint:check && yarn format:check && yarn test
+npm run --frozen-lockfile && npm run lint:check && npm run format:check
