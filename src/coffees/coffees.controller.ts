@@ -7,12 +7,14 @@ import {
   HttpStatus,
   Logger,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CoffeesService } from './coffees.service';
+import { Coffee } from './entities/coffee.entity';
 
 @Controller('coffees')
 @ApiTags('coffees')
@@ -25,7 +27,6 @@ export class CoffeesController {
   @HttpCode(HttpStatus.OK)
   findAll(@Query() paginationQuery) {
     // const { limit, offset } = paginationQuery;
-    this.logger.log('Find all invoked');
     return this.coffeesService.findAll();
   }
 
@@ -37,26 +38,19 @@ export class CoffeesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  createCoffee(@Body() body) {
-    this.logger.log(
-      `Create coffee invoked to add coffee with name ${body.name}`,
-    );
-    return body;
+  create(@Body() body: Coffee) {
+    return this.coffeesService.create(body);
   }
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  updateCoffee(@Param('id') id: string, @Body() body) {
-    this.logger.log(
-      `Update coffee invoked to edit coffee with name ${body.name}`,
-    );
-    return `Element with ${id} will be updated with ${body.name}`;
+  updateCoffee(@Param('id', ParseIntPipe) id: number, @Body() body) {
+    return this.coffeesService.update(id, body);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  removeCoffee(@Param('id') id: string) {
-    this.logger.log(`Delete coffee invoked to delete coffee with id: ${id}`);
-    return `Element with ${id} will be removed with`;
+  removeCoffee(@Param('id', ParseIntPipe) id: number) {
+    return this.coffeesService.remove(id);
   }
 }
