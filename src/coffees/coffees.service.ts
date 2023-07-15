@@ -7,11 +7,12 @@ import {
 } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 
 @Injectable()
 export class CoffeesService {
   private readonly logger = new Logger(CoffeesService.name);
-  private coffees: Coffee[] | CreateCoffeeDto[] = [
+  private coffees: Coffee[] | CreateCoffeeDto[] | UpdateCoffeeDto = [
     {
       id: 1,
       name: 'White cafe',
@@ -41,9 +42,9 @@ export class CoffeesService {
     return this.coffees.push(body);
   }
 
-  update(id: number, body: Coffee) {
+  update(id: number, updateCoffeeDto: UpdateCoffeeDto) {
     this.logger.log(`Delete coffee invoked to delete coffee with id: ${id}`);
-    return (this.coffees[id] = body);
+    return (this.coffees[id] = updateCoffeeDto);
   }
 
   remove(id: number) {

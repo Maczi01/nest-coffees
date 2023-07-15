@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CoffeesService } from './coffees.service';
 import { Coffee } from './entities/coffee.entity';
 import {CreateCoffeeDto} from "./dto/create-coffee.dto/create-coffee.dto";
+import {UpdateCoffeeDto} from "./dto/create-coffee.dto/update-coffee.dto";
 
 @Controller('coffees')
 @ApiTags('coffees')
@@ -45,8 +46,8 @@ export class CoffeesController {
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  updateCoffee(@Param('id', ParseIntPipe) id: number, @Body() body) {
-    return this.coffeesService.update(id, body);
+  updateCoffee(@Param('id', ParseIntPipe) id: number, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+    return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
