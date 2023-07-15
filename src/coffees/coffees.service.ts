@@ -12,7 +12,7 @@ import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 @Injectable()
 export class CoffeesService {
   private readonly logger = new Logger(CoffeesService.name);
-  private coffees: Coffee[] | CreateCoffeeDto[] | UpdateCoffeeDto = [
+  private coffees: Coffee[] | CreateCoffeeDto[] | UpdateCoffeeDto[] = [
     {
       id: 1,
       name: 'White cafe',
@@ -35,11 +35,11 @@ export class CoffeesService {
     return coffee;
   }
 
-  create(body: CreateCoffeeDto) {
+  create(createCoffeeDto: CreateCoffeeDto) {
     this.logger.log(
-      `Create coffee invoked to add coffee with name ${body.name}`,
+      `Create coffee invoked to add coffee with name ${createCoffeeDto.name}`,
     );
-    return this.coffees.push(body);
+    return this.coffees.push({ id: 22, ...createCoffeeDto });
   }
 
   update(id: number, updateCoffeeDto: UpdateCoffeeDto) {
