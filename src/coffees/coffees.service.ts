@@ -44,10 +44,18 @@ export class CoffeesService {
 
   update(id: number, updateCoffeeDto: UpdateCoffeeDto) {
     this.logger.log(`Delete coffee invoked to delete coffee with id: ${id}`);
-    return (this.coffees[id] = updateCoffeeDto);
+    const index = this.coffees.findIndex((obj) => obj.id === id);
+    if (index !== -1) {
+      this.coffees[index] = {
+        ...this.coffees[index],
+        ...updateCoffeeDto,
+      };
+    }
+    return index;
   }
 
   remove(id: number) {
-    return this.coffees.splice(id, 1);
+    const index = this.coffees.findIndex((obj) => obj.id === id);
+    return this.coffees.splice(index, 1);
   }
 }

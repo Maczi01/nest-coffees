@@ -1,5 +1,5 @@
 export class Coffee {
-  id: number;
+  id?: number;
   name: string;
   brand: string;
   flavours: string[];
