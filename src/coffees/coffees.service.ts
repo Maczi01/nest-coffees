@@ -6,11 +6,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
+import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 
 @Injectable()
 export class CoffeesService {
   private readonly logger = new Logger(CoffeesService.name);
-  private coffees: Coffee[] = [
+  private coffees: Coffee[] | CreateCoffeeDto[] = [
     {
       id: 1,
       name: 'White cafe',
@@ -33,7 +34,7 @@ export class CoffeesService {
     return coffee;
   }
 
-  create(body: Coffee) {
+  create(body: CreateCoffeeDto) {
     this.logger.log(
       `Create coffee invoked to add coffee with name ${body.name}`,
     );
