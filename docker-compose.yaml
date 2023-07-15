@@ -7,3 +7,10 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: 123
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=mati082@o2.pl
+      - PGADMIN_DEFAULT_PASSWORD=abc123
+    ports:
+      - "5050:80"
