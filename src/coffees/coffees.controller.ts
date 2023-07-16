@@ -14,9 +14,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CoffeesService } from './coffees.service';
-import { Coffee } from './entities/coffee.entity';
-import {CreateCoffeeDto} from "./dto/create-coffee.dto/create-coffee.dto";
-import {UpdateCoffeeDto} from "./dto/create-coffee.dto/update-coffee.dto";
+import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 
 @Controller('coffees')
 @ApiTags('coffees')
@@ -34,7 +33,7 @@ export class CoffeesController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  findById(@Param('id') coffeeId: number) {
+  findById(@Param('id') coffeeId: string) {
     return this.coffeesService.findById(coffeeId);
   }
 
@@ -46,13 +45,16 @@ export class CoffeesController {
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  updateCoffee(@Param('id', ParseIntPipe) id: number, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+  updateCoffee(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCoffeeDto: UpdateCoffeeDto,
+  ) {
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  removeCoffee(@Param('id', ParseIntPipe) id: number) {
+  removeCoffee(@Param('id', ParseIntPipe) id: string) {
     return this.coffeesService.remove(id);
   }
 }
