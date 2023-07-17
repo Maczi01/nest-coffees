@@ -19,7 +19,7 @@ export class CoffeesService {
   ) {}
 
   findAll(paginationQuery: PaginationQuery) {
-    this.logger.log('Find all invoked');
+    this.logger.log('Find all called');
     const { limit, offset } = paginationQuery;
     return this.coffeeRepository.find({
       relations: { flavors: true },
