@@ -30,7 +30,12 @@ describe('CoffeesService', () => {
   describe('findAll', () => {
     it('should return an array of coffees', async () => {
       const result: Coffee[] = [
-        { id: 1, name: 'Coffee 1', brand: 'Tschiboo', flavors: ['vanilla'] },
+        {
+          id: 1,
+          name: 'Coffee 1',
+          brand: 'Tschiboo',
+          flavors: [{ id: 1, name: 'vanilla' }],
+        },
         { id: 2, name: 'Coffee 2', brand: 'Mokate', flavors: ['bitter'] },
       ];
       jest.spyOn(repository, 'find').mockResolvedValue(result);

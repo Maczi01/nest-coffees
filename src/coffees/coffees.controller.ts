@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
+import { PaginationQuery } from '../common/dto/pagination-query/pagination-query';
 
 @Controller('coffees')
 @ApiTags('coffees')
@@ -26,9 +27,9 @@ export class CoffeesController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQuery) {
     // const { limit, offset } = paginationQuery;
-    return this.coffeesService.findAll();
+    return this.coffeesService.findAll(paginationQuery);
   }
 
   @Get(':id')
