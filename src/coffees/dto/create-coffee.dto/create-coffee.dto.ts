@@ -28,5 +28,5 @@ export class CreateCoffeeDto {
     message: 'Title is too long',
     each: true,
   })
-  readonly flavours: string[];
+  readonly flavors: string[];
 }
