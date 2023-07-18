@@ -3,14 +3,41 @@ services:
   db:
     image: postgres:13
     restart: always
-    ports:
-      - 5432:5432
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 123
+      DATABASE_NAME: postgres
+
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=mati082@o2.pl
-      - PGADMIN_DEFAULT_PASSWORD=abc123
+      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
     ports:
       - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
