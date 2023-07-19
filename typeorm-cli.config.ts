@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import {CoffeeRefactor1689721357962} from "./src/migrations/1689721357962-CoffeeRefactor";
+import { CoffeeRefactor1689721357962 } from './src/migrations/1689721357962-CoffeeRefactor';
 
 export default new DataSource({
   type: 'postgres',

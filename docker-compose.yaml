@@ -12,22 +12,22 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    command: npm run start:dev
-    depends_on:
-      - db
-    environment:
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: 123
-      DATABASE_NAME: postgres
+#  app:
+#    build: .
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      - .:/usr/src/app
+#      - /usr/src/app/node_modules
+#    command: npm run start:dev
+#    depends_on:
+#      - db
+#    environment:
+#      DATABASE_HOST: db
+#      DATABASE_PORT: 5432
+#      DATABASE_USER: postgres
+#      DATABASE_PASSWORD: 123
+#      DATABASE_NAME: postgres
 
   pgadmin:
     image: dpage/pgadmin4
