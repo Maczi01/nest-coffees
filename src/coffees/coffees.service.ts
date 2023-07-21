@@ -18,6 +18,7 @@ export class CoffeesService {
     @InjectRepository(Coffee)
     private readonly coffeeRepository: Repository<Coffee>,
     @InjectRepository(Flavor)
+
     private readonly flavorRepository: Repository<Flavor>,
     private readonly dataSource: DataSource,
     private readonly configService: ConfigService,

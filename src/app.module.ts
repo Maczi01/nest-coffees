@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import appConfig from './config/app.config';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -26,6 +27,8 @@ import appConfig from './config/app.config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService
+  ],
 })
 export class AppModule {}
