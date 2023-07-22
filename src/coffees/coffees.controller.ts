@@ -17,6 +17,7 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 import { PaginationQuery } from '../common/dto/pagination-query/pagination-query';
+import { Public } from '../common/decorators/public.decorator';
 
 @Controller('coffees')
 @ApiTags('coffees')
@@ -25,10 +26,10 @@ export class CoffeesController {
 
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  @Public()
   @Get()
   @HttpCode(HttpStatus.OK)
   findAll(@Query() paginationQuery: PaginationQuery) {
-    // const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll(paginationQuery);
   }
 
