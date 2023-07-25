@@ -30,7 +30,6 @@ export class CoffeesController {
   @Get()
   @HttpCode(HttpStatus.OK)
   async findAll(@Query() paginationQuery: PaginationQuery) {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
     return this.coffeesService.findAll(paginationQuery);
   }
 
